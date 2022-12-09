@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import './App.css';
-import axios from 'axios'
 
 function App() {
 
@@ -48,7 +47,9 @@ function App() {
 
   return (
     <div className="app">
-      
+     <div className="attribute">
+     <a className='attribute-text' href="https://www.flaticon.com/free-icons/search" title="search icons">Search icons created by ariefstudio - Flaticon</a>
+     </div>
     <div className='search-container'>
       <input type="text" 
         value={location}
