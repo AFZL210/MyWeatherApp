@@ -4,17 +4,44 @@ import axios from 'axios'
 
 function App() {
 
-  const url = "https://api.openweathermap.org/data/2.5/weather?q=Delhi&appid=56bf8afec5be20a880e96ae3e69336c9"
-  const [data,setData] = useState({})
+  const StartUrl = "https://api.openweathermap.org/data/2.5/weather?q="
+  const EndUrl = "&appid=56bf8afec5be20a880e96ae3e69336c9"
+
+  const [data,setData] = useState({
+    cityName:"",
+    temp:"",
+    description:"",
+    feels:"",
+    humidity:"",
+    windSpeed:""
+  })
   const [location,setLocation] = useState("")
   
 
   const fetchDataFromApi = async() => {
-   
+   if(!location) {
+    alert("Please Enter city name");
+   }else{
+    const url = `${StartUrl}${location}${EndUrl}`;
     const res = await fetch(url)
     const data = await res.json()
-    console.log(data)
+    
+    
+    const temp = (((data.main.temp) - 32 ) * 0.5556).toFixed(1);
+    const feels = (((data.main.feels_like) - 32 ) * 0.5556).toFixed(1);
+    
+    setData({
+      cityName:data.name,
+      temp:`${temp}°C`,
+      description:data.weather.description,
+      feels:`${feels}°C`,
+      humidity:`${data.main.humidity}%`,
+      windSpeed:`${data.wind.speed * 1.6} KMPH`
+    })
+   }
   }
+
+
 
 
   return (
@@ -26,33 +53,33 @@ function App() {
         onChange={(e) => setLocation(e.target.value)}
         placeholder="Enter Location"
       />
-        <button onClick={fetchDataFromApi}>Search</button>
+       <a onClick={fetchDataFromApi} href=""><img src="./media/searchIcon.png" alt="" /></a>
       </div>
 
       <div className="container">
         <div className="top-container">
           <div className="city-name">
-            <p>Delhi</p>
+            <p>{data.cityName}</p>
           </div>
           <div className="temp">
-            <h1>26°C</h1>
+            <h1>{data.temp}</h1>
           </div>
           <div className="description">
-            <p>Clouds</p>
+            <p>{data.description}</p>
           </div>
         </div>
         <div className="bottom-container">
           <div className="bottom-content">
           <div className="feels">
-            <p>30°C</p>
+            <p>{data.feels}</p>
             <p>Feels Like</p>
           </div>
           <div className="humidity">
-            <p>20%</p>
+            <p>{data.humidity}</p>
             <p>Humidity</p>
           </div>
           <div className="wind">
-            <p>12 MPH</p>
+            <p>{data.windSpeed}</p>
             <p>Wind Speed</p>
           </div>
           </div>
