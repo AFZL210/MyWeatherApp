@@ -18,7 +18,8 @@ function App() {
   const [location,setLocation] = useState("")
   
 
-  const fetchDataFromApi = async() => {
+  const fetchDataFromApi = async(e) => {
+    e.preventDefault()
    if(!location) {
     alert("Please Enter city name");
    }else{
@@ -29,14 +30,15 @@ function App() {
     
     const temp = (((data.main.temp) - 32 ) * 0.5556).toFixed(1);
     const feels = (((data.main.feels_like) - 32 ) * 0.5556).toFixed(1);
-    
+    const wind = (data.wind.speed * 1.6).toFixed(1);
+
     setData({
       cityName:data.name,
       temp:`${temp}°C`,
       description:data.weather.description,
       feels:`${feels}°C`,
       humidity:`${data.main.humidity}%`,
-      windSpeed:`${data.wind.speed * 1.6} KMPH`
+      windSpeed:`${wind} KMPH`
     })
    }
   }
@@ -53,7 +55,7 @@ function App() {
         onChange={(e) => setLocation(e.target.value)}
         placeholder="Enter Location"
       />
-       <a onClick={fetchDataFromApi} href=""><img src="./media/searchIcon.png" alt="" /></a>
+       <a onClick={fetchDataFromApi} ><img className='search-icon' src="https://raw.githubusercontent.com/AFZL210/MyWeatherApp/main/src/media/searchIcon.png" alt="" /></a>
       </div>
 
       <div className="container">
