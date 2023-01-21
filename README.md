@@ -31,3 +31,7 @@ Mobile
 
 - [@afzl210](https://github.com/AFZL210)
 
+
+## Lessons Learned
+
+Learned how to fetch API and useState, useEffect react hooks
