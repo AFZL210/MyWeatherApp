@@ -64,12 +64,6 @@ h1{
   text-align: center;
 }
 
-@media screen and (max-width: 600px) {
-  p{
-    font-size: 0.8rem;
-  }
-}
-
 .search-container{
   text-align: center;
   padding-top: 1.5rem;
@@ -107,5 +101,9 @@ h1{
 @media only screen and (max-width:600px) {
   .attribute-text{
     font-size: 0.6rem;
+  }
+  
+  p{
+    font-size: 0.8rem;
   }
 }
